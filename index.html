@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DigiGadgets - Your Tech Partner</title>
+  <style>
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: #f5f7fa; /* light gray */
+      color: #333; /* dark charcoal */
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-weight: 400;
+      font-size: 14px;
+    }
+    a {
+      color: #4a90e2; /* soft blue */
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #357ABD;
+    }
+
+    /* Navbar */
+    header {
+      background: #ffffff;
+      padding: 14px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    }
+    .logo {
+      font-weight: 900;
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+      color: #4a90e2;
+      user-select: none;
+    }
+    nav a {
+      margin-left: 25px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 6px 10px;
+      border-radius: 30px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      display: inline-block;
+    }
+    nav a:hover {
+      background-color: #4a90e2;
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(74, 144, 226, 0.5);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #a9c4f2, #4a90e2);
+      padding: 90px 20px 60px;
+      text-align: center;
+      border-bottom-left-radius: 60px;
+      border-bottom-right-radius: 60px;
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 8px 15px rgba(74, 144, 226, 0.5);
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 14px;
+      letter-spacing: 1.5px;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+      letter-spacing: 0.5px;
+      font-weight: 400;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    .btn-primary {
+      margin-top: 25px;
+      padding: 12px 36px;
+      font-size: 1rem;
+      border: none;
+      background: #357ABD;
+      color: #fff;
+      border-radius: 40px;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 5px 12px rgba(53, 122, 189, 0.7);
+      transition: background-color 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: #2a5a9f;
+      box-shadow: 0 7px 18px rgba(42, 90, 159, 0.85);
+    }
+
+    /* Main content container */
+    main {
+      max-width: 1100px;
+      margin: 60px auto 90px;
+      padding: 0 20px;
+      flex-grow: 1;
+    }
+
+    /* Section titles */
+    section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 18px;
+      color: #357ABD;
+      border-bottom: 3px solid #a9c4f2;
+      padding-bottom: 5px;
+      font-weight: 700;
+    }
+
+    /* Featured Products Grid */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+    }
+    .product-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(53, 122, 189, 0.15);
+      overflow: hidden;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 22px rgba(53, 122, 189, 0.3);
+    }
+    .product-image {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-bottom: 1.5px solid #a9c4f2;
+      transition: filter 0.3s ease;
+    }
+    .product-card:hover .product-image {
+      filter: brightness(1.1);
+    }
+    .product-info {
+      padding: 16px 18px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .product-name {
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+      color: #357ABD;
+      letter-spacing: 0.03em;
+    }
+    .product-price {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #4a90e2;
+      letter-spacing: 0.05em;
+    }
+
+    /* About Us */
+    #about {
+      background: #fff;
+      padding: 32px 26px;
+      border-radius: 16px;
+      box-shadow: 0 0 18px rgba(74, 144, 226, 0.15);
+      margin: 60px 0;
+      color: #444;
+    }
+    #about p {
+      font-size: 1rem;
+      max-width: 850px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Services */
+    #services {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin: 60px 0;
+    }
+    .service-card {
+      background: #fefefe;
+      padding: 20px 16px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(74, 144, 226, 0.15);
+      text-align: center;
+      transition: box-shadow 0.3s ease;
+    }
+    .service-card:hover {
+      box-shadow: 0 8px 20px rgba(74, 144, 226, 0.3);
+    }
+    .service-icon {
+      font-size: 2.3rem;
+      color: #4a90e2;
+      margin-bottom: 12px;
+      user-select: none;
+    }
+    .service-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: #357ABD;
+    }
+    .service-desc {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    /* Testimonials */
+    #testimonials {
+      background: #f0f4fc;
+      padding: 40px 26px;
+      border-radius: 16px;
+      box-shadow: 0 0 26px rgba(74, 144, 226, 0.12);
+      margin: 60px 0;
+      max-width: 850px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #444;
+    }
+    #testimonials h2 {
+      margin-bottom: 30px;
+      text-align: center;
+      color: #357ABD;
+    }
+    .testimonial-card {
+      margin-bottom: 20px;
+      border-left: 4px solid #4a90e2;
+      padding-left: 14px;
+      font-style: italic;
+      font-size: 1rem;
+      position: relative;
+      user-select: none;
+    }
+    .testimonial-card:last-child {
+      margin-bottom: 0;
+    }
+    .testimonial-author {
+      font-weight: 700;
+      font-style: normal;
+      margin-top: 6px;
+      color: #357ABD;
+      font-size: 0.9rem;
+    }
+
+    /* Contact */
+    #contact {
+      background: #fff;
+      padding: 32px 26px;
+      border-radius: 16px;
+      box-shadow: 0 0 18px rgba(74, 144, 226, 0.15);
+      max-width: 580px;
+      margin: 60px auto 90px;
+      color: #444;
+    }
+    #contact h2 {
+      text-align: center;
+      margin-bottom: 22px;
+      font-size: 1.5rem;
+      color: #357ABD;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #357ABD;
+      user-select: none;
+      font-size: 0.9rem;
+    }
+    input, textarea {
+      padding: 10px 12px;
+      border: 1.5px solid #a9c4f2;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+      background: #fefefe;
+      color: #333;
+      resize: vertical;
+      font-family: inherit;
+      transition: border-color 0.3s ease;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #4a90e2;
+      box-shadow: 0 0 6px rgba(74,144,226,0.5);
+    }
+    input::placeholder, textarea::placeholder {
+      color: #a3b1cc;
+    }
+    button[type="submit"] {
+      background: #4a90e2;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 12px 0;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      box-shadow: 0 5px 12px rgba(74, 144, 226, 0.7);
+      transition: background-color 0.3s ease;
+    }
+    button[type="submit"]:hover {
+      background: #357ABD;
+      box-shadow: 0 7px 18px rgba(53, 122, 189, 0.85);
+    }
+
+    /* Footer */
+    footer {
+      background: #e7ecf6;
+      text-align: center;
+      padding: 20px 15px;
+      font-size: 0.8rem;
+      color: #666;
+      box-shadow: inset 0 2px 8px rgba(255,255,255,0.6);
+      user-select: none;
+      font-weight: 500;
+    }
+    footer a {
+      font-weight: 600;
+      color: #4a90e2;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">DIGIGADGETS</div>
+    <nav>
+      <a href="#products">Products</a>
+      <a href="#about">About Us</a>
+      <a href="#services">Services</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Discover The Latest Digital Gadgets</h1>
+    <p>Your one-stop shop for cutting-edge technology and must-have electronics.</p>
+    <button class="btn-primary">Shop Now</button>
+  </section>
+
+  <main>
+    <section id="products">
+      <h2>Featured Products</h2>
+      <div class="products">
+        <article class="product-card">
+          <img class="product-image" src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80" alt="Smartphone" />
+          <div class="product-info">
+            <h3 class="product-name">Smartphone X12 Pro</h3>
+            <p class="product-price">$899.00</p>
+          </div>
+        </article>
+        <article class="product-card">
+          <img class="product-image" src="headphones.avif" alt="Wireless Headphones" />
+          <div class="product-info">
+            <h3 class="product-name">NoiseCancel 700</h3>
+            <p class="product-price">$299.00</p>
+          </div>
+        </article>
+        <article class="product-card">
+          <img class="product-image" src="watch.webp" alt="Smartwatch" />
+          <div class="product-info">
+            <h3 class="product-name">Smartwatch V5</h3>
+            <p class="product-price">$349.00</p>
+          </div>
+        </article>
+        <article class="product-card">
+          <img class="product-image" src="images.jpeg" alt="Gaming Console" />
+          <div class="product-info">
+            <h3 class="product-name">NextGen Gaming Console</h3>
+            <p class="product-price">$499.00</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>About Us</h2>
+      <p>
+        At DigiGadgets, we are passionate about technology and innovation. Our mission is to bring the latest and most reliable digital gadgets to tech enthusiasts worldwide. 
+        We carefully select products that combine performance, design, and affordability, ensuring you get the best value every time.
+      </p>
+    </section>
+
+    <section id="services">
+      <h2>Our Services</h2>
+      <div class="service-card">
+        <div class="service-icon">🛒</div>
+        <h3 class="service-title">Wide Product Selection</h3>
+        <p class="service-desc">Explore a vast range of digital gadgets and accessories tailored to meet your needs.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🚚</div>
+        <h3 class="service-title">Fast Shipping</h3>
+        <p class="service-desc">Reliable and swift delivery to get your gadgets right on time.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🤝</div>
+        <h3 class="service-title">Customer Support</h3>
+        <p class="service-desc">Expert help and assistance whenever you need it, before and after purchase.</p>
+      </div>
+    </section>
+
+    <section id="testimonials">
+      <h2>What Our Customers Say</h2>
+      <div class="testimonial-card">
+        <p>"DigiGadgets offers incredible products with top-notch customer service. Shipping was super fast and hassle-free."</p>
+        <div class="testimonial-author">— Amanda T.</div>
+      </div>
+      <div class="testimonial-card">
+        <p>"The Smartwatch V5 I bought exceeded my expectations. Great quality and very stylish."</p>
+        <div class="testimonial-author">— Carlos M.</div>
+      </div>
+      <div class="testimonial-card">
+        <p>"A fantastic place for all tech lovers. The product range is extensive and prices are competitive."</p>
+        <div class="testimonial-author">— Sophie L.</div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <form action="#" method="post">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Your full name" required />
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 DigiGadgets. All rights reserved. | <a href="#contact">Contact</a>
+  </footer>
+
+</body>
+</html>
